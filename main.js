@@ -1,19 +1,21 @@
 function crearMascota() {
-  let nombre = prompt("Ingrese el nombre de su mascota");
-  let especie = prompt("Ingrese la especie de su mascota");
+  console.log("Se ha invocado la funcion crear mascota");
+  const nombre = prompt("Ingrese el nombre de su mascota");
+  const especie = prompt("Ingrese la especie de su mascota");
   let nuevaMascota = { nombre, especie };
   listaMascotas.push(nuevaMascota);
   listarMascotas();
 }
 
 function modificarMascota() {
+  console.log("Se ha iniciado la funcion modificar mascota");
   let modificarUltimaMascota = confirm(
     "Desea modificar la siguiente mascota: " +
       listaMascotas[listaMascotas.length - 1].nombre
   );
   if (modificarUltimaMascota) {
-    let nuevoNombre = prompt("Ingrese el nuevo nombre: ");
-    let nuevaEspecie = prompt("Ingrese la nueva especie: ");
+    const nuevoNombre = prompt("Ingrese el nuevo nombre: ");
+    const nuevaEspecie = prompt("Ingrese la nueva especie: ");
     listaMascotas[listaMascotas.length - 1].nombre = nuevoNombre;
     listaMascotas[listaMascotas.length - 1].especie = nuevaEspecie;
     listarMascotas();
@@ -23,6 +25,7 @@ function modificarMascota() {
 }
 
 function eliminarMascota() {
+  console.log("Se ha invocado la funcion eliminar mascota");
   alert(
     "Se eliminara la siguiente mascota: " +
       listaMascotas[listaMascotas.length - 1].nombre
@@ -37,7 +40,7 @@ function eliminarMascota() {
 }
 
 function listarMascotas() {
-  let mascotasListadasString = "";
+  console.log("se ha invocado la funcion listar mascotas");
   if (listaMascotas.length == 0) {
     alert("No hay mascotas para listar,regresando al menu principal");
   } else {
@@ -52,7 +55,7 @@ function listarMascotas() {
     );
   }
 }
-
+console.log("Inicia carga del programa");
 let iniciarSimulador = confirm("Bienvenido al sistema de gestion de mascotas");
 let listaMascotas = [];
 alert(
@@ -90,4 +93,5 @@ while (iniciarSimulador) {
     }
   }
 }
-alert("Fin del programa")
+console.log("Fin del programa");
+alert("Fin del programa");
