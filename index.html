@@ -4,13 +4,59 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="./assets/CSS/style.css" />
     <script defer src="./main.js"></script>
   </head>
   <body>
-    <h1>Pre-Entrega Nº 1-Curso Javascript Flex</h1>
-    <p>
-      Contador de mascotas, el programa permite crear, listar, modificar y
-      eliminar mascotas del registro
-    </p>
+    <div id="intro-container">
+      <h1>Pre-Entrega Nº 2-Curso Javascript Flex</h1>
+      <h3>
+        Contador de mascotas, el programa permite crear, listar, modificar y
+        eliminar mascotas del registro
+      </h3>
+      <div id="current-user-container">
+        <h5>El usuario actual es : XXXX</h5>
+      </div>
+    </div>
+    <hr />
+    <div id="pet-add-container">
+      <h2>Por favor ingrese el nombre y tipo de su mascota</h2>
+      <div class="form-container">
+        <form action="##" class="pet-form">
+          <label for="tipo-mascota"><h2>Seleccione su tipo de Mascota</h2></label>
+          <select name="Tipo de Mascota" id="tipo-mascota">
+            <option value="Gato">Gato</option>
+            <option value="Perro">Perro</option>
+          </select>
+          <input type="text" placeholder="Ingrese el nombre de su mascota" />
+          <div>
+            <button id="pet-save-button">Guardar</button>
+            <button id="pet-reset-form-button">Limpiar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="">
+      <h2>Listado de Mascotas Actuales</h2>
+      <div id="pet-list-container">
+        <ul class="pet-list">
+          <li>
+            <h2>Id Mascota: </h2>
+            <h2>Nombre:</h2>
+            <h2>Tipo de Mascota:</h2>
+          </li>
+          <li>
+            <h2>Id Mascota: </h2>
+            <h2>Nombre:</h2>
+            <h2>Tipo de Mascota:</h2>
+          </li>
+          <li>
+            <h2>Id Mascota: </h2>
+            <h2>Nombre:</h2>
+            <h2>Tipo de Mascota:</h2>
+          </li>
+        </ul>
+      </div>
+    </div>
   </body>
 </html>

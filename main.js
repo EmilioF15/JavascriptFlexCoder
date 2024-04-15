@@ -1,4 +1,4 @@
-function crearMascota() {
+/* function crearMascota() {
   console.log("Se ha invocado la funcion crear mascota");
   const nombre = prompt("Ingrese el nombre de su mascota");
   const especie = prompt("Ingrese la especie de su mascota");
@@ -95,3 +95,4 @@ while (iniciarSimulador) {
 }
 console.log("Fin del programa");
 alert("Fin del programa");
+ */
