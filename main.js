@@ -1,3 +1,48 @@
+function validarUsuario() {
+  let user = localStorage.getItem("User");
+
+  if (user == null || user == undefined) {
+    user = prompt("Ingrese su Usuario por Primera Vez");
+    localStorage.setItem("User", JSON.stringify(user));
+  }
+
+  const currentUser = document.querySelector("#current-user");
+  currentUser.innerText = `El usuario actual es : ${user}`;
+}
+function CargarMascotas() {
+  const mascotasMemoria = JSON.parse(localStorage.getItem("Mascotas"));
+  console.log(mascotasMemoria);
+
+  if (mascotasMemoria == null || mascotasMemoria == undefined) {
+    return [];
+  } else {
+    return mascotasMemoria;
+  }
+
+}
+
+function guardarMascotas() {
+  localStorage.setItem("Mascotas", JSON.stringify(Mascotas));
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  validarUsuario();
+  CargarMascotas();
+});
+
+class Mascota {
+  static id = 0;
+  constructor(nombre, tipo, usuario) {
+    this.nombre = nombre;
+    this.tipo = tipo;
+    this.usuario = usuario;
+    this.id = ++Mascota.Id;
+  }
+}
+Mascotas = CargarMascotas();
+
+Mascotas[0] = new Mascota("Solcito", "Gato", "Emilio");
+
 /* function crearMascota() {
   console.log("Se ha invocado la funcion crear mascota");
   const nombre = prompt("Ingrese el nombre de su mascota");
