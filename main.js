@@ -11,11 +11,11 @@ function validarUsuario() {
 
   const currentUser = document.querySelector("#current-user");
   currentUser.innerText = `El usuario actual es : ${user}`;
+  CargarMascotas;
   return user;
 }
 function CargarMascotas() {
   const mascotasMemoria = JSON.parse(localStorage.getItem("Mascotas"));
-  console.log(mascotasMemoria);
 
   if (mascotasMemoria == null || mascotasMemoria == undefined) {
     return [];
@@ -30,42 +30,64 @@ function guardarMascotas() {
 
 function recargarMascotas() {
   const mascotasMemoria = Array.from(CargarMascotas());
-  console.log(
-    "funcion Recargar mascotas tiene estas mascotas en memoria: ",
-    mascotasMemoria
-  );
   const listaMascotas = document.querySelector("#pet-list");
   listaMascotas.innerHTML = "";
   mascotasMemoria.forEach((mascota) =>
     listaMascotas.append(crearCardMascota(mascota))
   );
+  const botonesEliminar = document.querySelectorAll(".remove-pet-button");
+  botonesEliminar.forEach((el) =>
+    el.addEventListener("click", (e) => {
+      console.log(
+        "llamo funcion eliminar con argumentos ",
+        e.target.dataset.id
+      );
+      eliminarMascota(e.target.dataset.id);
+    })
+  );
 }
 
 function crearCardMascota(mascota) {
-  console.log("funcion crearCardMascota llamada con argumento:", mascota);
   const nuevaCard = document.createElement("li");
   const idMascota = document.createElement("h2");
   const nombreMascota = document.createElement("h2");
   const tipoMascota = document.createElement("h2");
+  const botonEliminarMascota = document.createElement("button");
+
+  botonEliminarMascota.innerText = "Eliminar Mascota";
+  botonEliminarMascota.classList.add("remove-pet-button");
+  botonEliminarMascota.dataset.id = mascota.id;
 
   idMascota.innerText = `Id Mascota: ${mascota.id}`;
   nombreMascota.innerText = `Nombre Mascota: ${mascota.nombre}`;
   tipoMascota.innerText = `Tipo Mascota: ${mascota.tipo}`;
 
-  nuevaCard.append(idMascota);
+  nuevaCard.appendChild(idMascota);
   nuevaCard.appendChild(nombreMascota);
   nuevaCard.appendChild(tipoMascota);
+  nuevaCard.appendChild(botonEliminarMascota);
 
   return nuevaCard;
 }
 
+function eliminarMascota(id) {
+  console.log(mascotas);
+  const index = Array.from(mascotas).findIndex((mascota) => mascota.id === id);
+  console.log("Se eliminar la mascota con el indice = ",index)
+
+  if (index !== -1) {
+    mascotas.splice(index, 1);
+  
+  }
+  guardarMascotas();
+  recargarMascotas();
+}
+
 mascotas = CargarMascotas();
 userActual = validarUsuario();
-console.log(userActual);
 
 function crearMascota(nombre, tipo) {
   mascotas.push(new Mascota(nombre, tipo));
-  console.log("ahora llamo a funcion recargarMascotas");
   guardarMascotas();
   recargarMascotas();
 }
@@ -79,8 +101,6 @@ class Mascota {
     this.id = ++Mascota.id;
   }
 }
-
-console.log(mascotas);
 
 /* function crearMascota() {
   console.log("Se ha invocado la funcion crear mascota");
