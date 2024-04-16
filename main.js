@@ -3,11 +3,15 @@ function validarUsuario() {
 
   if (user == null || user == undefined) {
     user = prompt("Ingrese su Usuario por Primera Vez");
+    const listaMascotas = document.querySelector("#pet-list");
+    listaMascotas.innerHTML = "";
+
     localStorage.setItem("User", JSON.stringify(user));
   }
 
   const currentUser = document.querySelector("#current-user");
   currentUser.innerText = `El usuario actual es : ${user}`;
+  return user;
 }
 function CargarMascotas() {
   const mascotasMemoria = JSON.parse(localStorage.getItem("Mascotas"));
@@ -18,30 +22,65 @@ function CargarMascotas() {
   } else {
     return mascotasMemoria;
   }
-
 }
 
 function guardarMascotas() {
-  localStorage.setItem("Mascotas", JSON.stringify(Mascotas));
+  localStorage.setItem("Mascotas", JSON.stringify(mascotas));
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  validarUsuario();
-  CargarMascotas();
-});
+function recargarMascotas() {
+  const mascotasMemoria = Array.from(CargarMascotas());
+  console.log(
+    "funcion Recargar mascotas tiene estas mascotas en memoria: ",
+    mascotasMemoria
+  );
+  const listaMascotas = document.querySelector("#pet-list");
+  listaMascotas.innerHTML = "";
+  mascotasMemoria.forEach((mascota) =>
+    listaMascotas.append(crearCardMascota(mascota))
+  );
+}
+
+function crearCardMascota(mascota) {
+  console.log("funcion crearCardMascota llamada con argumento:", mascota);
+  const nuevaCard = document.createElement("li");
+  const idMascota = document.createElement("h2");
+  const nombreMascota = document.createElement("h2");
+  const tipoMascota = document.createElement("h2");
+
+  idMascota.innerText = `Id Mascota: ${mascota.id}`;
+  nombreMascota.innerText = `Nombre Mascota: ${mascota.nombre}`;
+  tipoMascota.innerText = `Tipo Mascota: ${mascota.tipo}`;
+
+  nuevaCard.append(idMascota);
+  nuevaCard.appendChild(nombreMascota);
+  nuevaCard.appendChild(tipoMascota);
+
+  return nuevaCard;
+}
+
+mascotas = CargarMascotas();
+userActual = validarUsuario();
+console.log(userActual);
+
+function crearMascota(nombre, tipo) {
+  mascotas.push(new Mascota(nombre, tipo));
+  console.log("ahora llamo a funcion recargarMascotas");
+  guardarMascotas();
+  recargarMascotas();
+}
 
 class Mascota {
   static id = 0;
-  constructor(nombre, tipo, usuario) {
+  constructor(nombre, tipo) {
     this.nombre = nombre;
     this.tipo = tipo;
-    this.usuario = usuario;
-    this.id = ++Mascota.Id;
+    this.dueño = userActual;
+    this.id = ++Mascota.id;
   }
 }
-Mascotas = CargarMascotas();
 
-Mascotas[0] = new Mascota("Solcito", "Gato", "Emilio");
+console.log(mascotas);
 
 /* function crearMascota() {
   console.log("Se ha invocado la funcion crear mascota");
