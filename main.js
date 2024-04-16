@@ -82,16 +82,6 @@ function eliminarMascota(id) {
   guardarMascotas();
   recargarMascotas();
 }
-
-mascotas = CargarMascotas();
-userActual = validarUsuario();
-
-function crearMascota(nombre, tipo) {
-  mascotas.push(new Mascota(nombre, tipo));
-  guardarMascotas();
-  recargarMascotas();
-}
-
 class Mascota {
   static id = 0;
   constructor(nombre, tipo) {
@@ -101,6 +91,30 @@ class Mascota {
     this.id = ++Mascota.id;
   }
 }
+
+mascotas = CargarMascotas();
+userActual = validarUsuario();
+
+function crearMascota() {
+  const nombre = document.querySelector("#pet-name").value
+  const tipo = document.querySelector("#pet-type").value
+  console.log(nombre);
+  console.log(tipo);
+  mascotas.push(new Mascota(nombre, tipo));
+  guardarMascotas();
+  recargarMascotas();
+  
+  document.querySelector("#pet-name").value = "";
+  document.querySelector("#pet-type").value = "";
+
+}
+
+const botonAgregarMascota = document.querySelector("#pet-save-button");
+botonAgregarMascota.addEventListener("click",()=>{
+  crearMascota();
+})
+
+
 
 /* function crearMascota() {
   console.log("Se ha invocado la funcion crear mascota");

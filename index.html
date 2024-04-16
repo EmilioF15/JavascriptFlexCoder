@@ -25,11 +25,8 @@
       <div class="form-container">
         <form action="##" class="pet-form">
           <label for="tipo-mascota"><h2>Seleccione su tipo de Mascota</h2></label>
-          <select name="Tipo de Mascota" id="tipo-mascota">
-            <option value="Gato">Gato</option>
-            <option value="Perro">Perro</option>
-          </select>
-          <input type="text" placeholder="Ingrese el nombre de su mascota" />
+          <input type="text" placeholder="Ingrese el nombre de su mascota" id="pet-name" />
+          <input type="text" placeholder="ingrese la especie de su mascota" id="pet-type" />
           <div>
             <button id="pet-save-button">Guardar</button>
             <button id="pet-reset-form-button">Limpiar</button>
@@ -41,21 +38,6 @@
       <h2>Listado de Mascotas Actuales</h2>
       <div id="pet-list-container">
         <ul id="pet-list" class="pet-list">
-          <li>
-            <h2>Id Mascota: </h2>
-            <h2>Nombre:</h2>
-            <h2>Tipo de Mascota:</h2>
-          </li>
-          <li>
-            <h2>Id Mascota: </h2>
-            <h2>Nombre:</h2>
-            <h2>Tipo de Mascota:</h2>
-          </li>
-          <li>
-            <h2>Id Mascota: </h2>
-            <h2>Nombre:</h2>
-            <h2>Tipo de Mascota:</h2>
-          </li>
         </ul>
       </div>
     </div>
