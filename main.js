@@ -1,3 +1,6 @@
+let mascotas =[];
+let userActual ={};
+
 function validarUsuario() {
   let user = localStorage.getItem("User");
 
@@ -11,9 +14,18 @@ function validarUsuario() {
 
   const currentUser = document.querySelector("#current-user");
   currentUser.innerText = `El usuario actual es : ${user}`;
-  CargarMascotas;
+  CargarMascotas();
   return user;
 }
+const botonEliminarUsuario = document.querySelector("#close-session-button");
+botonEliminarUsuario.addEventListener("click", () => {
+  mascotas = [];
+  userActual ={};
+  Mascota.Id = 0;
+  localStorage.clear();
+  validarUsuario();
+
+});
 function CargarMascotas() {
   const mascotasMemoria = JSON.parse(localStorage.getItem("Mascotas"));
 
@@ -72,12 +84,11 @@ function crearCardMascota(mascota) {
 
 function eliminarMascota(id) {
   console.log(mascotas);
-  const index = Array.from(mascotas).findIndex((mascota) => mascota.id === id);
-  console.log("Se eliminar la mascota con el indice = ",index)
+  const index = Array.from(mascotas).findIndex((mascota) => mascota.id == id);
+  console.log("Se eliminar la mascota con el indice = ", index);
 
   if (index !== -1) {
     mascotas.splice(index, 1);
-  
   }
   guardarMascotas();
   recargarMascotas();
@@ -92,31 +103,40 @@ class Mascota {
   }
 }
 
-mascotas = CargarMascotas();
-userActual = validarUsuario();
 
 function crearMascota() {
-  const nombre = document.querySelector("#pet-name").value
-  const tipo = document.querySelector("#pet-type").value
+  const nombre = document.querySelector("#pet-name").value;
+  const tipo = document.querySelector("#pet-type").value;
   console.log(nombre);
   console.log(tipo);
   mascotas.push(new Mascota(nombre, tipo));
   guardarMascotas();
   recargarMascotas();
-  
+
   document.querySelector("#pet-name").value = "";
   document.querySelector("#pet-type").value = "";
-
 }
 
 const botonAgregarMascota = document.querySelector("#pet-save-button");
-botonAgregarMascota.addEventListener("click",()=>{
+botonAgregarMascota.addEventListener("click", () => {
   crearMascota();
+});
+
+const botonLimpiarFormulario = document.querySelector("#pet-reset-form-button");
+botonLimpiarFormulario.addEventListener("click", () => {
+  document.querySelector("#pet-name").value = "";
+  document.querySelector("#pet-type").value = "";
+});
+
+document.addEventListener("DOMContentLoaded",()=>{
+  validarUsuario();
+  recargarMascotas();
 })
 
 
 
-/* function crearMascota() {
+/* Primer Pre Entregable
+function crearMascota() {
   console.log("Se ha invocado la funcion crear mascota");
   const nombre = prompt("Ingrese el nombre de su mascota");
   const especie = prompt("Ingrese la especie de su mascota");
