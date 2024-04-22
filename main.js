@@ -1,5 +1,5 @@
-let mascotas =[];
-let userActual ={};
+let mascotas = [];
+let userActual = {};
 
 function validarUsuario() {
   let user = localStorage.getItem("User");
@@ -20,11 +20,10 @@ function validarUsuario() {
 const botonEliminarUsuario = document.querySelector("#close-session-button");
 botonEliminarUsuario.addEventListener("click", () => {
   mascotas = [];
-  userActual ={};
+  userActual = {};
   Mascota.Id = 0;
   localStorage.clear();
   validarUsuario();
-
 });
 function CargarMascotas() {
   const mascotasMemoria = JSON.parse(localStorage.getItem("Mascotas"));
@@ -103,7 +102,6 @@ class Mascota {
   }
 }
 
-
 function crearMascota() {
   const nombre = document.querySelector("#pet-name").value;
   const tipo = document.querySelector("#pet-type").value;
@@ -128,12 +126,10 @@ botonLimpiarFormulario.addEventListener("click", () => {
   document.querySelector("#pet-type").value = "";
 });
 
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded", () => {
   validarUsuario();
   recargarMascotas();
-})
-
-
+});
 
 /* Primer Pre Entregable
 function crearMascota() {
