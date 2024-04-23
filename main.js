@@ -22,16 +22,23 @@ function validarUsuario() {
 }
 const botonIngresarUsuario = document.querySelector("#user-login-button");
 botonIngresarUsuario.addEventListener("click", (e) => {
-  e.preventDefault();
   const userForm = document.querySelector("#user-input");
-
+  const petAddContainer = document.querySelector("#pet-add-container");
+  const petListContainer = document.querySelector("#pet-list-container");
   const currentUser = document.querySelector("#current-user");
+  e.preventDefault();
   currentUser.innerText = `El usuario actual es : ${userForm.value}`;
 
+  petAddContainer.classList.toggle("disabled");
+  petListContainer.classList.toggle("disabled");
   validarUsuario();
+  document.querty;
 });
 const botonEliminarUsuario = document.querySelector("#close-session-button");
 botonEliminarUsuario.addEventListener("click", () => {
+  const petAddContainer = document.querySelector("#pet-add-container");
+  const petListContainer = document.querySelector("#pet-list-container");
+
   mascotas = [];
   userActual = {};
   Mascota.id = 0;
@@ -41,6 +48,8 @@ botonEliminarUsuario.addEventListener("click", () => {
   const listaMascotas = document.querySelector("#pet-list");
   listaMascotas.innerHTML = "";
   document.querySelector("#user-input").value = "";
+  petAddContainer.classList.toggle("disabled");
+  petListContainer.classList.toggle("disabled");
 });
 
 function CargarMascotas() {
