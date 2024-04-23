@@ -2,29 +2,47 @@ let mascotas = [];
 let userActual = {};
 
 function validarUsuario() {
+  const userForm = document.querySelector("#user-input");
   let user = localStorage.getItem("User");
+  const currentUser = document.querySelector("#current-user");
 
-  if (user == null || user == undefined) {
-    user = prompt("Ingrese su Usuario por Primera Vez");
-    const listaMascotas = document.querySelector("#pet-list");
-    listaMascotas.innerHTML = "";
-
-    localStorage.setItem("User", JSON.stringify(user));
+  if (userForm.value === user) {
+    currentUser.innerText = `El usuario actual es : ${user}`;
+    recargarMascotas();
+  } else {
+    mascotas = [];
+    userActual = {};
+    Mascota.id = 0;
+    localStorage.clear();
+    localStorage.setItem("User", userForm.value);
+    user = userForm.value;
+    currentUser.innerText = `El usuario actual es : ${user}`;
+    recargarMascotas();
   }
+}
+const botonIngresarUsuario = document.querySelector("#user-login-button");
+botonIngresarUsuario.addEventListener("click", (e) => {
+  e.preventDefault();
+  const userForm = document.querySelector("#user-input");
 
   const currentUser = document.querySelector("#current-user");
-  currentUser.innerText = `El usuario actual es : ${user}`;
-  CargarMascotas();
-  return user;
-}
+  currentUser.innerText = `El usuario actual es : ${userForm.value}`;
+
+  validarUsuario();
+});
 const botonEliminarUsuario = document.querySelector("#close-session-button");
 botonEliminarUsuario.addEventListener("click", () => {
   mascotas = [];
   userActual = {};
-  Mascota.Id = 0;
+  Mascota.id = 0;
   localStorage.clear();
-  validarUsuario();
+  const currentUser = document.querySelector("#current-user");
+  currentUser.innerText = "Por favor ingresar su usuario";
+  const listaMascotas = document.querySelector("#pet-list");
+  listaMascotas.innerHTML = "";
+  document.querySelector("#user-input").value = "";
 });
+
 function CargarMascotas() {
   const mascotasMemoria = JSON.parse(localStorage.getItem("Mascotas"));
 
