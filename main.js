@@ -8,7 +8,8 @@ class Carrito {
   agregarArtciculoCarrito(articulo) {
     this.articulos.push(articulo);
     Carrito.contadorArticulos++;
-    this.calcularTotalCarrito();
+    Carrito.TotalCarrito += articulo.precio;
+    this.actualizarCarritoDisplay();
     console.log(
       `Se ha agregado el articulo ${articulo.nombre} al carrito, 
       el total es ahora ${Carrito.TotalCarrito} y tiene ${Carrito.contadorArticulos} Articulos Dentro`
@@ -17,7 +18,8 @@ class Carrito {
   eliminarArticuloCarrito(articulo) {
     this.articulos = this.articulos.filter((art) => art !== articulo);
     Carrito.contadorArticulos--;
-    this.calcularTotalCarrito();
+    Carrito.totalCarrito -= articulo.precio;
+    this.actualizarCarritoDisplay();
     console.log(
       `Se ha eliminado el articulo ${articulo.nombre} al carrito, 
       el total es ahora ${Carrito.TotalCarrito} y tiene ${Carrito.contadorArticulos} Articulos Dentro`
@@ -28,7 +30,14 @@ class Carrito {
       (acc, el) => acc + el.precio,
       0
     );
-    console.log(`El total del carrito es ${Carrito.TotalCarrito}`);
+    console.log(`El total del carrito es : ${Carrito.TotalCarrito}`);
+  }
+  actualizarCarritoDisplay(){
+    const carritoTotal = document.querySelector("#totalCarrito");
+    const carritoCantidadArticulos = document.querySelector("#cantidadArticulos");
+
+    carritoTotal.innerText = `El total de su compra es ${Carrito.TotalCarrito.toLocaleString("es-ES", {style: "currency", currency: "ars"})}`;
+    carritoCantidadArticulos.innerText = `Hay ${Carrito.contadorArticulos} articulos en el carrito`;
   }
 }
 
